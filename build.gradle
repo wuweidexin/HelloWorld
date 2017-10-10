@@ -1,0 +1,85 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+jar {
+    baseName = 'helloworld'
+    version =  '0.1.0'
+}
+project.ext {
+	springVersion="4.2.6.RELEASE"
+	mongoDriverVer="3.2.0-rc0"
+	jedisVer="2.4.2"
+	slf4jVer="1.7.13"
+	log4jVer="1.2.17"
+	solrVer="6.1.0"
+	apacheVer="3.14-beta1"
+	commonlang3="3.4"
+	springbootVer="1.4.1.RELEASE"
+}
+repositories {
+  	mavenLocal()
+    //maven {url "http://mvn.gt.igexin.com/nexus/content/repositories/releases"}
+	mavenCentral()
+    //ivy {url "http://repo.mycompany.com/repo"}
+}
+
+dependencies {
+    compile(
+	    "junit:junit:4.8",
+		//redis
+		"redis.clients:jedis:$jedisVer",
+	
+		"org.slf4j:slf4j-api:$slf4jVer",
+		"org.slf4j:slf4j-log4j12:$slf4jVer",
+		
+		"log4j:log4j:$log4jVer",
+		
+		//操作mongo的驱动包
+		"org.mongodb:mongo-java-driver:$mongoDriverVer",
+		//quartz
+		"org.quartz-scheduler:quartz:2.2.2",
+		//json
+		"net.sf.json-lib:json-lib:2.4:jdk15",
+					
+		"com.healthmarketscience.sqlbuilder:sqlbuilder:2.1.1",
+		//apache 操作word和excel
+		"org.apache.poi:poi:$apacheVer",
+		//for word
+		"org.apache.poi:poi-scratchpad:$apacheVer",
+		//for xml
+		"org.apache.poi:poi-ooxml:$apacheVer",
+		"org.apache.commons:commons-lang3:$commonlang3",
+		"commons-codec:commons-codec:1.10",
+		
+		//spring
+		"org.springframework:spring-core:$springVersion",
+		"org.springframework:spring-beans:$springVersion",
+		"org.springframework:spring-context:$springVersion",
+		"org.springframework:spring-context-support:$springVersion",
+		"org.springframework:spring-aop:$springVersion",
+		"org.springframework:spring-jdbc:$springVersion",
+		"org.springframework:spring-tx:$springVersion",
+		"org.springframework:spring-web:$springVersion",
+		"org.springframework:spring-webmvc:$springVersion",
+		"org.springframework:spring-expression:$springVersion",
+		
+		//solr
+		"org.apache.solr:solr-solrj:$solrVer",
+		'com.github.sgroschupf:zkclient:0.1',
+		'io.netty:netty-all:4.1.14.Final',
+		'org.apache.zookeeper:zookeeper:3.5.0-alpha',
+		'org.apache.curator:curator-framework:3.2.1',
+		'org.apache.curator:curator-recipes:3.2.1',
+		'org.apache.httpcomponents:httpclient:4.5.2'
+		
+    )
+    // https://mvnrepository.com/artifact/com.alibaba/fastjson
+	compile group: 'com.alibaba', name: 'fastjson', version: '1.2.32'
+    
+    //关联依赖本地文件夹  
+   	compile fileTree(dir: 'lib', include: '*.jar')
+}
+
